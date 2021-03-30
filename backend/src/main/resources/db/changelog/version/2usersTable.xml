@@ -11,10 +11,13 @@
             <column name="id" type="int8">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="varchar(200)">
-                <constraints nullable="false"/>
+            <column name="email" type="varchar(200)">
+                <constraints nullable="false" unique="true"/>
             </column>
-            <column name="mail" type="varchar(200)">
+            <column name="name" type="varchar(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(120)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
