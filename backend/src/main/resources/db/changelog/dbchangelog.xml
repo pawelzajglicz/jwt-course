@@ -3,5 +3,6 @@
 
     <include file="version/01nimuairySchema.xml" relativeToChangelogFile="true"/>
     <include file="version/02usersTable.xml" relativeToChangelogFile="true"/>
+    <include file="version/03rolesTable.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
