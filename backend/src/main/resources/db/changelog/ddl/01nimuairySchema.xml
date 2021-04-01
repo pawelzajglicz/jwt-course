@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd
       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 
-    <changeSet id="1a" author="pawel">
+    <!--<changeSet id="1a" author="pawel">
         <sql dbms="postgresql"
              endDelimiter=";"
              splitStatements="false">
@@ -17,6 +17,13 @@
              endDelimiter=";"
              splitStatements="false">
             CREATE SEQUENCE nimuairy.hibernate_sequence;
+        </sql>
+    </changeSet>-->
+    <changeSet id="1c" author="pawel">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="false">
+            ALTER SEQUENCE nimuairy.hibernate_sequence RESTART WITH 1;
         </sql>
     </changeSet>
 
