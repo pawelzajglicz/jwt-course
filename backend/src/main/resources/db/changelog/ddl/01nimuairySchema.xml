@@ -5,11 +5,18 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd
       http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 
-    <changeSet id="1" author="pawel">
+    <changeSet id="1a" author="pawel">
         <sql dbms="postgresql"
              endDelimiter=";"
              splitStatements="false">
             CREATE SCHEMA nimuairy
+        </sql>
+    </changeSet>
+    <changeSet id="1b" author="pawel">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="false">
+            CREATE SEQUENCE nimuairy.hibernate_sequence;
         </sql>
     </changeSet>
 
