@@ -5,3 +5,11 @@
   --red: #DA2C38;
   --green: #26532B;
 }
+
+html {
+  min-height: 100%;
+}
+
+body {
+  background: radial-gradient(ellipse at right -50% bottom -50%, var(--gray) -100%, var(--dark-blue) 100%)
+}
