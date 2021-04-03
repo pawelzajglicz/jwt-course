@@ -12,8 +12,8 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
     NavigationComponent,
     UpperPanelComponent
   ],
-  imports: [,
-    AppRoutingModule
+  imports: [
+    AppRoutingModule,
     BrowserModule
   ],
   providers: [],
