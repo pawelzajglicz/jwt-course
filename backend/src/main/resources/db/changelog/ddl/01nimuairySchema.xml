@@ -1,0 +1,30 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <!--<changeSet id="1a" author="pawel">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="false">
+            CREATE SCHEMA nimuairy
+        </sql>
+    </changeSet>
+    <changeSet id="1b" author="pawel">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="false">
+            CREATE SEQUENCE nimuairy.hibernate_sequence;
+        </sql>
+    </changeSet>-->
+    <changeSet id="1c" author="pawel">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="false">
+            ALTER SEQUENCE nimuairy.hibernate_sequence RESTART WITH 1;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
