@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                                  JwtAccessDeniedHandler jwtAccessDeniedHandler,
                                  JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
                                  JwtAuthorizationFilter jwtAuthorizationFilter,
-                                 @Qualifier("userDetailsService") UserDetailsService userDetailsService) {
+                                 @Qualifier("UserDetailsService") UserDetailsService userDetailsService) {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
