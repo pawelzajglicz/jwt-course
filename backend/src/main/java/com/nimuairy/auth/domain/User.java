@@ -29,8 +29,7 @@ public class User implements Serializable {
     private Date lastLoginDate;
     private Date lastLoginDateDisplay;
     private Date joinDate;
-    @Transient
-    private String[] roles;
+    private String role;
     @Transient
     private String[] authorities;
     private boolean isActive;
