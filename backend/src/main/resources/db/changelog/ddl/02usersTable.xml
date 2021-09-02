@@ -40,6 +40,9 @@
             <column name="join_date" type="datetime">
                 <constraints nullable="false"/>
             </column>
+            <column name="role" type="varchar(120)">
+                <constraints nullable="false"/>
+            </column>
             <column name="is_active" type="boolean">
                 <constraints nullable="false"/>
             </column>
