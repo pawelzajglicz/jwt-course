@@ -42,11 +42,6 @@ public class ExceptionHandling implements ErrorController {
     private static final String PAGE_NOT_FOUND = "There is no mapping for this URL";
     private static final String ERROR_PATH = "/error";
 
-    @Override
-    public String getErrorPath() {
-        return ERROR_PATH;
-    }
-
     @RequestMapping(ERROR_PATH)
     public ResponseEntity<HttpResponse> notFound404() {
         return createHttpResponse(NOT_FOUND, PAGE_NOT_FOUND);
