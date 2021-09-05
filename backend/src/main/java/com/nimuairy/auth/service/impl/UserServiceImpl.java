@@ -25,6 +25,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import static com.nimuairy.auth.constant.UserImplementationConstant.*;
 import static com.nimuairy.auth.enumeration.Role.*;
 
 @Qualifier("UserDetailsService")
@@ -33,10 +34,6 @@ import static com.nimuairy.auth.enumeration.Role.*;
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
-    public static final String EMAIL_ALREADY_EXISTS = "Email already exists";
-    public static final String NO_USER_FOUND_BY_USERNAME = "No user found by username ";
-    public static final String RETURNING_FOUND_USER_BY_USERNAME = "Returning found user by username: ";
-    public static final String USERNAME_ALREADY_EXISTS = "Username already exists";
 
     private BCryptPasswordEncoder passwordEncoder;
     private UserRepository userRepository;
@@ -144,6 +141,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private String getTemporaryProfileImageUrl() {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/image/profile/temp").toUriString();
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH).toUriString();
     }
 }
