@@ -33,6 +33,11 @@ import static com.nimuairy.auth.enumeration.Role.*;
 @Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
+    public static final String EMAIL_ALREADY_EXISTS = "Email already exists";
+    public static final String NO_USER_FOUND_BY_USERNAME = "No user found by username ";
+    public static final String RETURNING_FOUND_USER_BY_USERNAME = "Returning found user by username: ";
+    public static final String USERNAME_ALREADY_EXISTS = "Username already exists";
+
     private BCryptPasswordEncoder passwordEncoder;
     private UserRepository userRepository;
 
@@ -46,14 +51,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
-            log.error("User not found by username: " + username);
-            throw new UsernameNotFoundException("User not found by username: " + username);
+            log.error(NO_USER_FOUND_BY_USERNAME + username);
+            throw new UsernameNotFoundException(NO_USER_FOUND_BY_USERNAME + username);
         } else {
             user.setLastLoginDateDisplay(user.getLastLoginDate());
             user.setLastLoginDate(new Date());
             userRepository.save(user);
             UserPrincipal userPrincipal = new UserPrincipal(user);
-            log.info("Returning found user by username: " + username);
+            log.info(RETURNING_FOUND_USER_BY_USERNAME + username);
 
             return userPrincipal;
         }
@@ -99,29 +104,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     private User validateNewUsernameAndEmail(String currentUserName, String newUsername, String newEmail) throws UserNotFoundException, UsernameExistException, EmailExistException {
+
+        User userByNewUsername = findUserByUsername(newUsername);
+        User userByNewEmail = findUSerByEmail(newEmail);
         if (StringUtils.isNotBlank(currentUserName)) {
             User currentUser = findUserByUsername(currentUserName);
             if (currentUser == null) {
-                throw new UserNotFoundException("No user found by username " + currentUserName);
+                throw new UserNotFoundException(NO_USER_FOUND_BY_USERNAME + currentUserName);
             }
-            User userByNewUsername = findUserByUsername(newUsername);
             if (userByNewUsername != null && !currentUser.getId().equals(userByNewUsername.getId())) {
-                throw new UsernameExistException("Username already exists");
+                throw new UsernameExistException(USERNAME_ALREADY_EXISTS);
             }
-            User userByNewEmail = findUSerByEmail(newEmail);
             if (userByNewEmail != null && !currentUser.getId().equals(userByNewEmail.getId())) {
-                throw new EmailExistException("Username already exists");
+                throw new EmailExistException(EMAIL_ALREADY_EXISTS);
             }
             return currentUser;
 
         } else {
-            User userByUsername = findUserByUsername(newUsername);
-            if (userByUsername != null) {
-                throw new UsernameExistException("Username already exists");
+            if (userByNewUsername != null) {
+                throw new UsernameExistException(USERNAME_ALREADY_EXISTS);
             }
-            User userByEmail = findUSerByEmail(newEmail);
-            if (userByUsername != null) {
-                throw new EmailExistException("Username already exists");
+            if (userByNewEmail != null) {
+                throw new EmailExistException(EMAIL_ALREADY_EXISTS);
             }
             return null;
         }
