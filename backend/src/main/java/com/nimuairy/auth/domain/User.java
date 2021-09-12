@@ -1,12 +1,14 @@
 package com.nimuairy.auth.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @Data
@@ -30,8 +32,11 @@ public class User implements Serializable {
     private Date lastLoginDateDisplay;
     private Date joinDate;
     private String role;
-    @Transient
-    private String[] authorities;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "users_authorities",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    private Set<Authority> authorities = new HashSet<>();
     private boolean isActive;
     private boolean isNotLocked;
 }

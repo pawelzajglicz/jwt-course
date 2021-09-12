@@ -6,5 +6,8 @@
 
     <include file="ddl/01nimuairySchema.xml" relativeToChangelogFile="true"/>
     <include file="ddl/02usersTable.xml" relativeToChangelogFile="true"/>
+    <include file="ddl/03authoritiesTable.xml" relativeToChangelogFile="true"/>
+    <include file="ddl/04usersauthoritiesTable.xml" relativeToChangelogFile="true"/>
+    <include file="dml/05usersauthoritiesInsert.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

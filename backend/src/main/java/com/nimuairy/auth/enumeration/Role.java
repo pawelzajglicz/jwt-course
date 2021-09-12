@@ -1,6 +1,10 @@
 package com.nimuairy.auth.enumeration;
 
-import static com.nimuairy.auth.constant.Authority.*;
+import com.nimuairy.auth.domain.Authority;
+
+import java.util.Set;
+
+import static com.nimuairy.auth.constant.Authorities.*;
 
 public enum Role {
     ROLE_USER(USER_AUTHORITIES),
@@ -9,13 +13,13 @@ public enum Role {
     ROLE_ADMIN(ADMIN_AUTHORITIES),
     ROLE_SUPER_USER(SUPER_ADMIN_AUTHORITIES);
 
-    private String[] authorities;
+    private Set<Authority> authorities;
 
-    Role(String... authorities) {
+    Role(Set<Authority> authorities) {
         this.authorities = authorities;
     }
 
-    public String[] getAuthorities() {
+    public Set<Authority>getAuthorities() {
         return authorities;
     }
 }

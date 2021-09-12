@@ -1,15 +1,12 @@
 package com.nimuairy.auth.domain;
 
+import java.util.Collection;
+import java.util.stream.Collectors;
+
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-import static java.util.Arrays.stream;
 
 @AllArgsConstructor
 public class UserPrincipal implements UserDetails {
@@ -18,7 +15,10 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return stream(user.getAuthorities()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+        return user.getAuthorities().stream()
+                .map(Authority::getName)
+                .map(EAuthority::toString)
+                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
     }
 
     @Override

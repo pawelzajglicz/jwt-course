@@ -1,0 +1,22 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd
+        http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+
+    <changeSet id="3" author="pawel">
+        <createTable tableName="authorities">
+            <column name="id" type="int8">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+        <rollback>
+            drop table authorities
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
