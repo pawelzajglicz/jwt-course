@@ -1,3 +1,10 @@
+jwt:
+  expirationMs: 86400000
+  secret: nimuairySecretKey
+
+nimuairy:
+  maximum-number-of-attempts: 5
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -15,7 +22,3 @@ spring:
   liquibase:
     change-log: classpath:/db/changelog/dbchangelog.xml
     default-schema: nimuairy
-
-jwt:
-  expirationMs: 86400000
-  secret: nimuairySecretKey
