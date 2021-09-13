@@ -9,6 +9,7 @@ import com.nimuairy.auth.exception.domain.UserNotFoundException;
 import com.nimuairy.auth.exception.domain.UsernameExistException;
 import com.nimuairy.auth.repository.AuthorityRepository;
 import com.nimuairy.auth.repository.UserRepository;
+import com.nimuairy.auth.service.LoginAttemptService;
 import com.nimuairy.auth.service.UserService;
 
 import javax.transaction.Transactional;
@@ -40,11 +41,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private AuthorityRepository authorityRepository;
     private BCryptPasswordEncoder passwordEncoder;
+    private LoginAttemptService loginAttemptService;
     private UserRepository userRepository;
 
-    public UserServiceImpl(AuthorityRepository authorityRepository, BCryptPasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public UserServiceImpl(AuthorityRepository authorityRepository, BCryptPasswordEncoder passwordEncoder, LoginAttemptService loginAttemptService, UserRepository userRepository) {
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
+        this.loginAttemptService = loginAttemptService;
         this.userRepository = userRepository;
     }
 
@@ -56,6 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             log.error(NO_USER_FOUND_BY_USERNAME + username);
             throw new UsernameNotFoundException(NO_USER_FOUND_BY_USERNAME + username);
         } else {
+            validateLoginAttempt(user);
             user.setLastLoginDateDisplay(user.getLastLoginDate());
             user.setLastLoginDate(new Date());
             userRepository.save(user);
@@ -63,6 +67,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             log.info(RETURNING_FOUND_USER_BY_USERNAME + username);
 
             return userPrincipal;
+        }
+    }
+
+    private void validateLoginAttempt(User user) {
+        if (user.isNotLocked()) {
+            if (loginAttemptService.hasExceededMaxAttempts(user.getUsername())) {
+                user.setNotLocked(false);
+            } else {
+                user.setNotLocked(true);
+            }
+        } else {
+            loginAttemptService.evictUserFromLoginAttemptCache(user.getUsername());
         }
     }
 
