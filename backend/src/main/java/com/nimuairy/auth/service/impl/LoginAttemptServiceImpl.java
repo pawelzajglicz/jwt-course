@@ -5,10 +5,11 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.nimuairy.auth.service.LoginAttemptService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class LoginAttemptServiceImpl implements LoginAttemptService {
@@ -31,9 +32,14 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
     }
 
     @Override
-    public void addUserToLoginAttemptCache(String username) throws ExecutionException {
+    public void addUserToLoginAttemptCache(String username) {
         int attempts = 0;
-        attempts = loginAttemptCache.get(username) + 1;
+        try {
+            attempts = loginAttemptCache.get(username) + 1;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Caching error");
+        }
         loginAttemptCache.put(username, attempts);
     }
 
@@ -43,7 +49,12 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
     }
 
     @Override
-    public boolean hasExceededMaxAttempts(String username) throws ExecutionException {
-        return loginAttemptCache.get(username) >= MAXIMUM_NUMBER_OF_ATTEMPTS;
+    public boolean hasExceededMaxAttempts(String username) {
+        try {
+            return loginAttemptCache.get(username) >= MAXIMUM_NUMBER_OF_ATTEMPTS;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Caching error");
+        }
     }
 }
