@@ -9,7 +9,6 @@ import java.util.Properties;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Session;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -45,7 +44,7 @@ public class EmailServiceImpl implements com.nimuairy.auth.service.EmailService 
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email, false));
         message.setRecipients(Message.RecipientType.CC, InternetAddress.parse(ccEmail, false));
         message.setSubject(EMAIL_SUBJECT);
-        message.setSubject("Hello " + firstname + ", \n \n Your new account password is: " + password + "\n \n The Support Team");
+        message.setText("Hello " + firstname + ", \n \n Your new account password is: " + password + "\n \n The Support Team");
         message.setSentDate(new Date());
         message.saveChanges();
 

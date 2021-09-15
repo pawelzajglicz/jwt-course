@@ -9,14 +9,16 @@ import com.nimuairy.auth.exception.domain.UserNotFoundException;
 import com.nimuairy.auth.exception.domain.UsernameExistException;
 import com.nimuairy.auth.repository.AuthorityRepository;
 import com.nimuairy.auth.repository.UserRepository;
+import com.nimuairy.auth.service.EmailService;
 import com.nimuairy.auth.service.LoginAttemptService;
 import com.nimuairy.auth.service.UserService;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.mail.MessagingException;
+import javax.transaction.Transactional;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -41,12 +43,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private AuthorityRepository authorityRepository;
     private BCryptPasswordEncoder passwordEncoder;
+    private EmailService emailService;
     private LoginAttemptService loginAttemptService;
     private UserRepository userRepository;
 
-    public UserServiceImpl(AuthorityRepository authorityRepository, BCryptPasswordEncoder passwordEncoder, LoginAttemptService loginAttemptService, UserRepository userRepository) {
+    public UserServiceImpl(AuthorityRepository authorityRepository, BCryptPasswordEncoder passwordEncoder, EmailService emailService, LoginAttemptService loginAttemptService, UserRepository userRepository) {
         this.authorityRepository = authorityRepository;
         this.passwordEncoder = passwordEncoder;
+        this.emailService = emailService;
         this.loginAttemptService = loginAttemptService;
         this.userRepository = userRepository;
     }
@@ -83,7 +87,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User register(String firstName, String lastName, String username, String email) throws UserNotFoundException, UsernameExistException, EmailExistException {
+    public User register(String firstName, String lastName, String username, String email) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException {
         validateNewUsernameAndEmail(StringUtils.EMPTY, username, email);
         User user = new User();
         user.setUserId(generateUserId());
@@ -105,7 +109,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setRole(ROLE_USER.name());
         user.setUsername(username);
         userRepository.save(user);
-        log.info("New user password: " + password); // temporary for testing
+        emailService.sendNewPasswordEmail(firstName, password, email);
 
         return user;
     }
