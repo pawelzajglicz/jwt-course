@@ -18,16 +18,16 @@ import static com.nimuairy.auth.constant.EmailConstant.*;
 @Service
 public class EmailServiceImpl implements com.nimuairy.auth.service.EmailService {
 
-    @Value("${cc-email}")
+    @Value("#{environment.cc_email}")
     private String ccEmail;
 
-    @Value("${from-email}")
+    @Value("#{environment.from_email}")
     private String fromEmail;
 
-    @Value("${email-address-password-sender}")
+    @Value("#{environment.email_address_password_sender}")
     private String emailAddressPasswordSender;
 
-    @Value("${email-address-password-sender-password}")
+    @Value("#{environment.email_address_password_sender_password}")
     private String emailAddressPasswordSenderPassword;
 
     @Override
