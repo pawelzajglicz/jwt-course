@@ -1,2 +1,2 @@
-create schema nimuairy;
-create sequence nimuairy.hibernate_sequence;
+CREATE SCHEMA IF NOT EXISTS nimuairy;
+CREATE SEQUENCE IF NOT EXISTS nimuairy.hibernate_sequence;
