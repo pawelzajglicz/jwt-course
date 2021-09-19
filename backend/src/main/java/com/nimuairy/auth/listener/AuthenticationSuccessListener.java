@@ -1,6 +1,5 @@
 package com.nimuairy.auth.listener;
 
-import com.nimuairy.auth.domain.User;
 import com.nimuairy.auth.domain.UserPrincipal;
 import com.nimuairy.auth.service.LoginAttemptService;
 import org.springframework.context.event.EventListener;

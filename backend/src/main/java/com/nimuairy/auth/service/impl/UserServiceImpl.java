@@ -80,7 +80,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setActive(isActive);
         user.setNotLocked(isNonLocked);
         user.setRole(getRoleEnumName(role).name());
-        user.setAuthorities(getRoleEnumName(role).getAuthorities());
+        user.setAuthorities(new HashSet<>(getRoleEnumName(role).getAuthorities())
+                .stream()
+                .map(Authority::getName)
+                .map(authorityName -> authorityRepository.findByName(authorityName).orElseThrow(() -> new RuntimeException("Error: Authority is not found.")))
+                .collect(Collectors.toSet()));
         user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
         userRepository.save(user);
         saveProfileImage(user, profileImage);
@@ -131,7 +135,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User register(String firstName, String lastName, String username, String email) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException {
         validateNewUsernameAndEmail(StringUtils.EMPTY, username, email);
         User user = new User();
-        user.setUserId(generateUserId());
+        String userId = generateUserId();
+        user.setUserId(userId);
         String password = generatePassword();
         user.setActive(true);
         user.setAuthorities(new HashSet<>(ROLE_USER.getAuthorities())
@@ -145,7 +150,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setLastName(lastName);
         user.setNotLocked(true);
         user.setPassword(encodePassword(password));
-        user.setProfileImageUrl(getTemporaryProfileImageUrl(username));
+        user.setProfileImageUrl(getTemporaryProfileImageUrl(userId));
         user.setRole(ROLE_USER.name());
         user.setUsername(username);
         userRepository.save(user);
@@ -184,7 +189,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         currentUser.setActive(isActive);
         currentUser.setNotLocked(isNonLocked);
         currentUser.setRole(getRoleEnumName(role).name());
-        currentUser.setAuthorities(getRoleEnumName(role).getAuthorities());
+        currentUser.setAuthorities(new HashSet<>(getRoleEnumName(role).getAuthorities())
+                .stream()
+                .map(Authority::getName)
+                .map(authorityName -> authorityRepository.findByName(authorityName).orElseThrow(() -> new RuntimeException("Error: Authority is not found.")))
+                .collect(Collectors.toSet()));
         userRepository.save(currentUser);
         saveProfileImage(currentUser, profileImage);
 
@@ -207,22 +216,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return Role.valueOf(role.toUpperCase());
     }
 
-    private String getTemporaryProfileImageUrl(String username) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH + username).toUriString();
+    private String getTemporaryProfileImageUrl(String userId) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH + userId).toUriString();
     }
 
     private void saveProfileImage(User user, MultipartFile profileImage) throws IOException {
         if (profileImage != null) {
-            Path userFolder = Paths.get(USER_FOLDER + user.getUsername()).toAbsolutePath().normalize();
+            Path userFolder = Paths.get(USER_FOLDER + user.getUserId()).toAbsolutePath().normalize();
             if (!Files.exists(userFolder)) {
                 Files.createDirectories(userFolder);
                 log.info(DIRECTORY_CREATED + userFolder);
             }
-            Files.deleteIfExists(Paths.get(userFolder + user.getUsername() + DOT + JPG_EXTENSION));
-            Files.copy(profileImage.getInputStream(), userFolder.resolve(user.getUsername() + DOT + JPG_EXTENSION), REPLACE_EXISTING);
-            user.setProfileImageUrl(setProfileImageUrl(user.getUsername()));
+            Files.deleteIfExists(Paths.get(userFolder + user.getUserId() + DOT + JPG_EXTENSION));
+            Files.copy(profileImage.getInputStream(), userFolder.resolve(user.getUserId() + DOT + JPG_EXTENSION), REPLACE_EXISTING);
+            user.setProfileImageUrl(setProfileImageUrl(user.getUserId()));
             userRepository.save(user);
-            log.info(FILE_SAVED_IN_FILE_SYSTEM + profileImage.getOriginalFilename());
+            log.info(FILE_SAVED_IN_FILE_SYSTEM + user.getUserId());
         }
     }
 
