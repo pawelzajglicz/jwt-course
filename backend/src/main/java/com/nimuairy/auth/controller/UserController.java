@@ -144,7 +144,7 @@ public class UserController extends ExceptionHandling {
         return response(NO_CONTENT, USER_DELETED_SUCCESSFULLY);
     }
 
-    @PatchMapping("/update-profile-image")
+    @PutMapping("/update-profile-image")
     public ResponseEntity<User> updateProfileImage(@RequestParam("username") String username,
                                                    @RequestParam() MultipartFile profileImage) throws UserNotFoundException, UsernameExistException, EmailExistException, IOException {
         User updatedUser = userService.updateProfileImage(username, profileImage);
