@@ -7,7 +7,7 @@ import { AuthenticationService } from '../service/authentication.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(private authenticationService: AuthenticationService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.includes(`${this.authenticationService.host}/user/login`)) {
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
-    const requestClone = request.clone({setHeaders: { Authorization: `Bearer ${token}` }});
+    const requestClone = request.clone({ setHeaders: { Authorization: `Bearer ${token}` } });
 
     return next.handle(requestClone);
   }
