@@ -31,7 +31,7 @@ export class AuthenticationService {
     return JSON.parse(this.browserStorage.get('user'));
   }
 
-  isLoggedIn() {
+  isUserLoggedIn() {
     this.loadToken();
     if (this.token != null && this.token !== '') {
       const tokenSubject = this.jwtHelper.decodeToken(this.token).sub;
