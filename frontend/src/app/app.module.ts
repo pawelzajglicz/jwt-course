@@ -1,9 +1,12 @@
-import { HttpClientModule} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
+import { AuthenticationService } from './auth/service/authentication.service';
+import { UserService } from './auth/service/user.service';
 import { NavigationComponent } from './navigation/navigation.component';
 import { UpperPanelComponent } from './upper-panel/upper-panel.component';
 
@@ -18,7 +21,15 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthenticationService,
+    UserService,
+   {
+     provide: HTTP_INTERCEPTORS,
+     useClass: AuthInterceptor,
+     multi: true
+   }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

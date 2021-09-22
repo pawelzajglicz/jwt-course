@@ -1,18 +1,18 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+
+import { BrowserStorageService } from './../../util/browser-storage.service';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-
-import { environment } from 'src/environments/environment';
 import { User } from '../model/user';
-import { BrowserStorageService } from './../../util/browser-storage.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private host: string = environment.apiUrl;
-  private jwtHelper: JwtHelperService = new JwtHelperService();,
+  public host: string = environment.apiUrl;
+  private jwtHelper: JwtHelperService = new JwtHelperService();
   private loggedInUsername: string;
   private token: string;
 
