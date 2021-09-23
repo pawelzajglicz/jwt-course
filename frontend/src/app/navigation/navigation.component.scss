@@ -1,9 +1,12 @@
 .navigator {
   color: var(--gray);
+  display: flex;
+  gap: 12px;
   margin-left: 10px;
 }
 
 .nav-item {
+  display: inline-block;
   list-style-type: none;
   margin-bottom: 4px;
 }
