@@ -1,11 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
-
-import { BrowserStorageService } from './../../util/browser-storage.service';
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { User } from '../model/user';
+
 import { environment } from 'src/environments/environment';
+import { User } from '../model/user';
+import { BrowserStorageService } from './../../util/browser-storage.service';
 
 @Injectable({
   providedIn: 'root'
