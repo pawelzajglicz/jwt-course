@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 
+import { NotificationService } from 'src/app/notification-module/notification.service';
 import { AuthenticationService } from '../service/authentication.service';
 
 @Injectable({
@@ -10,6 +11,7 @@ import { AuthenticationService } from '../service/authentication.service';
 export class AuthenticationGuard implements CanActivate {
 
   constructor(private authenticationService: AuthenticationService,
+              private notificationService: NotificationService,
               private router: Router) { }
 
   canActivate(
@@ -23,6 +25,8 @@ export class AuthenticationGuard implements CanActivate {
       return true;
     }
     this.router.navigate(['/login']);
+    this.notificationService.error('You need to log in to access this page');
+    
     return false;
   }
 }
