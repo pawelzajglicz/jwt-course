@@ -12,13 +12,15 @@ import { UserService } from './auth/service/user.service';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NotificationModule } from './notification-module/notification.module';
 import { UpperPanelComponent } from './upper-panel/upper-panel.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     NavigationComponent,
-    UpperPanelComponent
+    UpperPanelComponent,
+    RegisterComponent
   ],
   imports: [
     AppRoutingModule,
