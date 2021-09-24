@@ -141,13 +141,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "app",
+      "nim",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "app",
+      "nim",
       "kebab-case"
     ]
   }
