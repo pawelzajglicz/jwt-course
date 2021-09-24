@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationGuard } from './auth/guard/authentication.guard';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
+import { LoginComponent } from './auth/login/login.component';
 import { AuthenticationService } from './auth/service/authentication.service';
 import { UserService } from './auth/service/user.service';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -15,6 +16,7 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
     NavigationComponent,
     UpperPanelComponent
   ],
