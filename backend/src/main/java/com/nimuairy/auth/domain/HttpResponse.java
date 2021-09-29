@@ -20,11 +20,11 @@ public class HttpResponse {
 
     }
 
-    public HttpResponse(int httpStatusCode, HttpStatus httpStatus, String message, String reason) {
+    public HttpResponse(int httpStatusCode, HttpStatus httpStatus, String reason, String message) {
         this.httpStatusCode = httpStatusCode;
         this.httpStatus = httpStatus;
-        this.message = message;
         this.reason = reason;
+        this.message = message;
         this.timeStamp = new Date();
     }
 }
