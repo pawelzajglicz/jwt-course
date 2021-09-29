@@ -12,7 +12,7 @@ export class NotificationService {
     this.notifier.notify('default', message);
   }
 
-  error(message: string) {
+  error(message: string = 'An error occured.') {
     this.notifier.notify('error', message);
   }
 
