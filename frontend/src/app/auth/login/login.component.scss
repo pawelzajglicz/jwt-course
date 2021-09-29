@@ -1,4 +1,60 @@
+nim-login {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  &__field {
+    display: flex;
+    flex-direction: column;
+
+    &__error {
+      color: var(--pink);
+      font-size: 0.85em;
+    }
+  }
+
+  &__submit {
+    align-self: center;
+    margin-top: 18px;
+    width: 60%;
+
+    &__spinner {
+      margin-right: 4px;
+    }
+  }
+}
+
 .login {
-  color: var(--gray);
-  text-align: center;
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__content {
+    background-color: var(--green);
+    border-radius: 25px;
+    color: var(--gray);
+    display: inline-block;
+    padding: 20px 30px;
+    text-align: center;
+  }
+
+  &__title {
+    margin-bottom: 18px;
+    margin-top: 0;
+  }
+}
+
+.sign-up {
+  font-size: 0.9em;
+  margin-top: 6px;
+
+  &__link {
+    color: var(--light-blue);
+  }
 }

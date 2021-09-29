@@ -51,8 +51,8 @@ export class AuthenticationService {
     this.token = this.browserStorage.get('token');
   }
 
-  logIn(user: User): Observable<HttpResponse<any> | HttpErrorResponse> {
-    return this.http.post<HttpResponse<any> | HttpErrorResponse>(`${this.host}/user/login`, user, {observe: 'response'});
+  logIn(user: User) {
+    return this.http.post<User>(`${this.host}/user/login`, user, {observe: 'response'});
   }
 
   logOut() {
@@ -68,7 +68,7 @@ export class AuthenticationService {
     this.browserStorage.set('token', token);
   }
 
-  register(user: User): Observable<User | HttpErrorResponse> {
+  register(user: User) {
     return this.http.post<User | HttpErrorResponse>(`{this.host}/user/register`, user);
   }
 }
