@@ -69,6 +69,6 @@ export class AuthenticationService {
   }
 
   register(user: User) {
-    return this.http.post<User | HttpErrorResponse>(`{this.host}/user/register`, user);
+    return this.http.post<User>(`${this.host}/user/register`, user);
   }
 }

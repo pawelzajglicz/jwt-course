@@ -1,1 +1,62 @@
-<p>register works!</p>
+<div class="register__container">
+  <div class="register__content">
+    <h3 class="register__title">User Management Portal</h3>
+
+    <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" class="form">
+
+      <div class="form__field">
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-user input__icon"></i></span>
+          <input type="text" name="firstName" placeholder="First name" required ngModel #firstNameInput="ngModel"
+            class="form__input">
+        </div>
+        <span *ngIf="firstNameInput.invalid && firstNameInput.touched" class="form__field__error">
+          Please enter a first name
+        </span>
+      </div>
+
+      <div class="form__field">
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-user input__icon"></i></span>
+          <input type="text" name="lastName" placeholder="Last name" required ngModel #lastNameInput="ngModel"
+            class="form__input">
+        </div>
+        <span *ngIf="lastNameInput.invalid && lastNameInput.touched" class="form__field__error">
+          Please enter a last name
+        </span>
+      </div>
+
+      <div class="form__field">
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-id-card input__icon"></i></span>
+          <input type="text" name="username" placeholder="Username" required ngModel #usernameInput="ngModel"
+            class="form__input">
+        </div>
+        <span *ngIf="usernameInput.invalid && usernameInput.touched" class="form__field__error">
+          Please enter a username
+        </span>
+      </div>
+
+      <div class="form__field">
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-envelope input__icon"></i></span>
+          <input type="text" name="email" placeholder="Email" required ngModel #emailInput="ngModel"
+            class="form__input">
+        </div>
+        <span *ngIf="emailInput.invalid && emailInput.touched" class="form__field__error">
+          Please enter an email.
+        </span>
+      </div>
+
+      <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="form__submit">
+        <i *ngIf="showLoading" class="fas fa-spinner fa-spin form__submit__spinner"></i>
+        <span *ngIf="showLoading">Loading...</span>
+        <span *ngIf="!showLoading">Register</span>
+      </button>
+    </form>
+
+    <div class="log-in">
+      Already have an account? <a routerLink="/login" class="ml-2">Log In</a>
+    </div>
+  </div>
+</div>

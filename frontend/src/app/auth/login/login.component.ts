@@ -18,8 +18,8 @@ export class LoginComponent implements OnInit {
   showLoading: boolean;
 
   constructor(private authenticationService: AuthenticationService,
-    private notificationService: NotificationService,
-    private router: Router) { }
+              private notificationService: NotificationService,
+              private router: Router) { }
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
@@ -31,23 +31,19 @@ export class LoginComponent implements OnInit {
 
   onLogin(user: User) {
     this.showLoading = true;
-    console.log(user);
     this.authenticationService.logIn(user)
-    .pipe(
-      finalize(() => this.showLoading = false)
-    )
-    .subscribe({
-      next: (response: HttpResponse<User>) => {
-        const token = response.headers.get(HeaderType.JWT_TOKEN);
-        this.authenticationService.saveToken(token);
-        this.authenticationService.addUserToLocalCache(response.body);
-        this.router.navigateByUrl('/user/management');
-      },
-      error: (errorResponse: HttpErrorResponse) => {
-        console.log(errorResponse);
-        this.notificationService.error(errorResponse.error.message);
-      }}
-      );
+      .pipe(
+        finalize(() => this.showLoading = false)
+      )
+      .subscribe({
+        next: (response: HttpResponse<User>) => {
+          const token = response.headers.get(HeaderType.JWT_TOKEN);
+          this.authenticationService.saveToken(token);
+          this.authenticationService.addUserToLocalCache(response.body);
+          this.router.navigateByUrl('/user/management');
+        },
+        error: (errorResponse: HttpErrorResponse) => this.notificationService.error(errorResponse.error.message)
+      }
+    );
   }
-
 }
