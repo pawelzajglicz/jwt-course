@@ -1,5 +1,10 @@
 h1 {
   color: var(--gray);
+  display: inline-block;
   font-size: 64px;
   margin: 20px;
+}
+
+nim-navigation {
+  display: inline-block;
 }
