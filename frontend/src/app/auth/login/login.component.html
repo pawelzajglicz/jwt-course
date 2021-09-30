@@ -4,21 +4,26 @@
 
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="form">
       <div class="form__field">
-        <input type="text" name="username" placeholder="Username" ngModel #usernameInput="ngModel" required>
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-user input__icon"></i></span>
+          <input type="text" name="username" placeholder="Username" ngModel #usernameInput="ngModel" required class="form__input">
+        </div>
         <span *ngIf="usernameInput.invalid && usernameInput.touched" class="form__field__error">
           Please, enter a username.
         </span>
       </div>
 
       <div class="form__field">
-        <input type="password" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required>
+        <div class="form__input-suite">
+          <span class="form__icon-container"><i class="fas fa-key input__icon"></i></span>
+          <input type="password" name="password" placeholder="Password" ngModel #passwordInput="ngModel" required class="form__input">
+        </div>
         <span *ngIf="passwordInput.invalid && passwordInput.touched" class="form__field__error">
           Please, enter a password.
         </span>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button"
-        class="form__submit">
+      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="form__submit">
         <i *ngIf="showLoading" class="fas fa-spinner fa-spin form__submit__spinner"></i>
         <span *ngIf="showLoading">Loading...</span>
         <span *ngIf="!showLoading">Login</span>
@@ -26,7 +31,7 @@
     </form>
 
     <div class="sign-up">
-        Don't have an account? <a class="sign-up__link">Sign up.</a>
+      Don't have an account? <a class="sign-up__link">Sign up.</a>
     </div>
   </div>
 </div>
