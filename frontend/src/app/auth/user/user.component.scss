@@ -1,0 +1,64 @@
+nim-user {
+}
+
+h5, h6 {
+  color: var(--gray);
+  text-align: center;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1.15em;
+  margin-bottom: 20px;
+  margin-top: 28px;
+}
+
+.header {
+  &__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__content {
+    background-color: var(--green);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 34px;
+    width: 75%;
+  }
+
+  &__left {
+    display: flex;
+    gap: 20px;
+  }
+
+  &__right {
+
+  }
+}
+
+.link {
+  &__container {
+    border-radius: 8px;
+    padding: 12px 24px;
+
+    & a {
+      color: var(--gray);
+      cursor: pointer;
+    }
+  }
+
+  &__icon {
+    margin-right: 6px;
+  }
+
+  &__active {
+    background-color: var(--dark-blue);
+    color: var(--gray);
+  }
+}

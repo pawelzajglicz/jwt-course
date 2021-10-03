@@ -1,1 +1,33 @@
-<p>user works!</p>
+
+<h5>User Management Portal</h5>
+<h6 *ngIf="!!title">{{title}}</h6>
+
+<div class="header__container">
+  <div class="header__content">
+
+    <div class="header__left">
+      <div class="link__container link__active">
+        <a (click)="setTitle('Users')">
+          <i class="fa fa-users link__icon"></i>
+          <span>Users</span>
+        </a>
+      </div>
+
+      <div class="link__container">
+        <a (click)="setTitle('Settings')">
+          <i class="fa fa-cogs link__icon"></i>
+          Settings
+        </a>
+      </div>
+    </div>
+
+    <div class="header__right">
+      <div class="link__container">
+        <a (click)="setTitle('Profile')">
+          <i class="fa fa-user link__icon"></i>
+          Welcome John,
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
