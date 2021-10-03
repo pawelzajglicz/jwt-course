@@ -10,7 +10,7 @@ import { AuthenticationService } from '../service/authentication.service';
 @Component({
   selector: 'nim-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['../../styles/form-block.scss']
 })
 export class RegisterComponent implements OnInit {
 

@@ -1,6 +1,6 @@
-<div class="register__container">
-  <div class="register__content">
-    <h3 class="register__title">User Management Portal</h3>
+<div class="form-block__container">
+  <div class="form-block__content">
+    <h3 class="form-block__title">User Management Portal</h3>
 
     <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)" class="form">
 
@@ -55,8 +55,8 @@
       </button>
     </form>
 
-    <div class="log-in">
-      Already have an account? <a routerLink="/login" class="ml-2">Log In</a>
+    <div class="form-block__footer">
+      Already have an account? <a routerLink="/login" class="form-block__footer__link">Log In</a>
     </div>
   </div>
 </div>

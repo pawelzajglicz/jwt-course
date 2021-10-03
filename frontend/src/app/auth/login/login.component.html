@@ -1,6 +1,6 @@
-<div class="login__container">
-  <div class="login__content">
-    <h3 class="login__title">User management portal</h3>
+<div class="form-block__container">
+  <div class="form-block__content">
+    <h3 class="form-block__title">User management portal</h3>
 
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)" class="form">
       <div class="form__field">
@@ -30,8 +30,8 @@
       </button>
     </form>
 
-    <div class="sign-up">
-      Don't have an account? <a routerLink="/register" class="sign-up__link">Sign up.</a>
+    <div class="form-block__footer">
+      Don't have an account? <a routerLink="/register" class="form-block__footer__link">Sign up.</a>
     </div>
   </div>
 </div>

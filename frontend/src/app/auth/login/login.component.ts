@@ -11,7 +11,7 @@ import { AuthenticationService } from '../service/authentication.service';
 @Component({
   selector: 'nim-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../../styles/form-block.scss']
 })
 export class LoginComponent implements OnInit {
 
