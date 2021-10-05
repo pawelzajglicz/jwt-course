@@ -1,8 +1,13 @@
-nim-user {
+:host {
+  align-items: center;
+  color: var(--light-gray);
+  display: flex;
+  flex-direction: column;
 }
 
-h5, h6 {
-  color: var(--gray);
+h5,
+h6 {
+  color: var(--light-gray);
   text-align: center;
 }
 
@@ -26,19 +31,16 @@ h6 {
   &__content {
     background-color: var(--green);
     border-radius: 10px;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     padding: 20px 34px;
-    width: 75%;
+    width: 100%;
   }
 
   &__left {
     display: flex;
     gap: 20px;
-  }
-
-  &__right {
-
   }
 }
 
@@ -48,7 +50,7 @@ h6 {
     padding: 12px 24px;
 
     & a {
-      color: var(--gray);
+      color: var(--light-gray);
       cursor: pointer;
     }
   }
@@ -59,6 +61,68 @@ h6 {
 
   &__active {
     background-color: var(--dark-blue);
-    color: var(--gray);
+    color: var(--light-gray);
   }
+}
+
+.table {
+  width: 100%;
+
+  .mat-row {
+    height: 3.5em;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+
+    button {
+      padding: 4px 6px;
+    }
+  }
+
+  &__cell {
+    border-color: var(--gray);
+    border-width: 2px;
+    margin: 0 10px;
+
+    img {
+      vertical-align: middle;
+    }
+
+    &--right {
+      padding-right: 30px;
+      text-align: right;
+    }
+  }
+
+  &__utils {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+
+    button {
+      background-color: var(--dark-blue);
+      border: none;
+      border-radius: 12px;
+      color: var(--light-gray);
+      padding: 6px 12px;
+
+      span {
+        margin-left: 6px;
+      }
+    }
+
+    input {
+      border-radius: 6px;
+      padding-left: 8px;
+    }
+  }
+}
+
+.users-management__content {
+  max-width: 1200px;
+  width: 80%;
 }

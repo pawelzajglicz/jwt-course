@@ -1,33 +1,84 @@
-
 <h5>User Management Portal</h5>
 <h6 *ngIf="!!title">{{title}}</h6>
 
-<div class="header__container">
-  <div class="header__content">
+<div class="users-management__content">
+  <div class="header__container">
+    <div class="header__content">
 
-    <div class="header__left">
-      <div class="link__container link__active">
-        <a (click)="setTitle('Users')">
-          <i class="fa fa-users link__icon"></i>
-          <span>Users</span>
-        </a>
+      <div class="header__left">
+        <div class="link__container link__active">
+          <a (click)="setTitle('Users')">
+            <i class="fa fa-users link__icon"></i>
+            <span>Users</span>
+          </a>
+        </div>
+
+        <div class="link__container">
+          <a (click)="setTitle('Settings')">
+            <i class="fa fa-cogs link__icon"></i>
+            Settings
+          </a>
+        </div>
       </div>
 
-      <div class="link__container">
-        <a (click)="setTitle('Settings')">
-          <i class="fa fa-cogs link__icon"></i>
-          Settings
-        </a>
-      </div>
-    </div>
-
-    <div class="header__right">
-      <div class="link__container">
-        <a (click)="setTitle('Profile')">
-          <i class="fa fa-user link__icon"></i>
-          Welcome John,
-        </a>
+      <div>
+        <div class="link__container">
+          <a (click)="setTitle('Profile')">
+            <i class="fa fa-user link__icon"></i>
+            Welcome John,
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+
+  <div class="table__utils">
+    <input name="searchTerm" #searchInput="ngModel" ngModel type="search" placeholder="Search users...">
+    <button type="button">
+      <i class="fa fa-plus"></i><span>New User</span>
+    </button>
+
+    <div>
+      <button type="button">
+        <i *ngIf="refreshing" class="fas fa-sync fa-spin"></i>
+        <i *ngIf="!refreshing" (click)="getUsers(true)" class="fas fa-sync"></i>
+      </button>
+    </div>
+  </div>
+
+  <table mat-table [dataSource]="dataSource" class="table">
+
+    <ng-container [matColumnDef]="'photo'">
+      <th mat-header-cell *matHeaderCellDef>
+        Photo
+      </th>
+      <td mat-cell *matCellDef="let row" class="table__cell">
+        <img height="40" width="40" src="{{row?.profileImageUrl}}" alt="" />
+      </td>
+    </ng-container>
+
+    <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+      <th mat-header-cell *matHeaderCellDef>
+        {{column.header}}
+      </th>
+      <td mat-cell *matCellDef="let row" class="table__cell">
+        {{column.cell(row)}}
+      </td>
+    </ng-container>
+
+    <ng-container [matColumnDef]="'actions'">
+      <th mat-header-cell *matHeaderCellDef class="table__cell--right">
+        Actions
+      </th>
+      <td mat-cell *matCellDef="let row" class="table__cell table__cell--right">
+        <div class="table__actions">
+          <button><i class="fas fa-edit"></i></button>
+          <button><i class="fas fa-trash"></i></button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

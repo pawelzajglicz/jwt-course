@@ -1,6 +1,7 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatTableModule } from '@angular/material/table'
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    MatTableModule,
     NotificationModule
   ],
   providers: [

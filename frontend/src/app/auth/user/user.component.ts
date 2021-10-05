@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { finalize } from 'rxjs';
 
 import { User } from '../model/user';
@@ -16,6 +17,41 @@ export class UserComponent implements OnInit {
   refreshing: boolean;
   title = 'Users';
   users: User[];
+
+  dataSource: MatTableDataSource<User>;
+  columns = [
+    {
+      columnDef: 'id',
+      header: 'User ID',
+      cell: (user: User) => `${user.userId}`
+    },
+    {
+      columnDef: 'firstName',
+      header: 'First Name',
+      cell: (user: User) => `${user.firstName}`
+    },
+    {
+      columnDef: 'lastName',
+      header: 'Last Name',
+      cell: (user: User) => `${user.lastName}`
+    },
+    {
+      columnDef: 'username',
+      header: 'Username',
+      cell: (user: User) => `${user.username}`
+    },
+    {
+      columnDef: 'email',
+      header: 'Email',
+      cell: (user: User) => `${user.email}`
+    },
+    {
+      columnDef: 'status',
+      header: 'Status',
+      cell: (user: User) => user.active ? 'Active' : 'Inactive'
+    }
+  ];
+  displayedColumns: string[];
 
   constructor(private notificationService: NotificationService,
               private userService: UserService) { }
@@ -34,6 +70,8 @@ export class UserComponent implements OnInit {
         next: (users: User[]) => {
           this.userService.addUsersToLocalCache(users);
           this.users = users;
+          this.dataSource = new MatTableDataSource(users);
+          this.initDisplayedColumns();
           if (showNotification) {
             this.notificationService.success(`${users.length} user(s) loaded successfully`);
           }
@@ -43,7 +81,17 @@ export class UserComponent implements OnInit {
       )
   }
 
+  onSelectUser(user: User) {
+
+  }
+
   setTitle(title: string) {
     this.title = title;
+  }
+
+  private initDisplayedColumns() {
+    this.displayedColumns = ['photo'];
+    this.displayedColumns.push(...this.columns.map(c => c.columnDef));
+    this.displayedColumns.push('actions');
   }
 }

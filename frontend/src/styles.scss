@@ -4,9 +4,10 @@
 
 :root {
   --dark-blue: #182F4D;
-  --gray: #EBEAE5;
+  --gray: #888888;
   --green: #26532B;
   --light-blue: rgba(32, 207, 219, 0.822);
+  --light-gray: #EBEAE5;
   --pink: #E072A4;
   --red: #DA2C38;
 }
@@ -16,5 +17,5 @@ html {
 }
 
 body {
-  background: radial-gradient(ellipse at right -50% bottom -50%, var(--gray) -100%, var(--dark-blue) 100%)
+  background: radial-gradient(ellipse at right -50% bottom -50%, var(--light-gray) -100%, var(--dark-blue) 100%)
 }
