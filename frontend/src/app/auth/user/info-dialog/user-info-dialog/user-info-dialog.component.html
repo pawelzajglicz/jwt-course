@@ -1,0 +1,27 @@
+<div class="header">
+  <span class="header__user-info">{{user?.firstName}} {{user.lastName}}</span>
+</div>
+
+<hr class="divider">
+
+<div class="content">
+  <div class="card">
+    <div>
+      <img src="{{user.profileImageUrl}}" class="card__image" alt="" />
+    </div>
+
+    <div class="card__details">
+      <span class="card__details__line">{{user.firstName}} {{user.lastName}}</span>
+      <span class="card__details__line">{{user.username}}</span>
+      <span class="card__details__line">Status: {{user.active ? 'Active' : 'Inactive'}}</span>
+      <span class="card__details__line">Join date: {{user.joinDate | date:'HH:mm:ss dd-MM-yyyy'}}</span>
+      <span class="card__details__line">Last seen: {{user.lastLoginDate | date:'HH:mm:ss dd-MM-yyyy'}}</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="footer">
+  <button class="footer__close-button">Close</button>
+</div>

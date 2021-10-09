@@ -1,3 +1,5 @@
+$table-border-radius: 25px;
+
 :host {
   align-items: center;
   color: var(--light-gray);
@@ -66,10 +68,37 @@ h6 {
 }
 
 .table {
+
+  border-radius: $table-border-radius;
+  background-color: var(--grass-green);
+  margin-top: 20px;
   width: 100%;
+
+  th:first-of-type {
+    border-top-left-radius: $table-border-radius;
+  }
+  th:last-of-type {
+    border-top-right-radius: $table-border-radius;
+  }
+  tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: $table-border-radius;
+  }
+  tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: $table-border-radius;
+  }
+
+  .mat-cell {
+    color: inherit;
+  }
 
   .mat-row {
     height: 3.5em;
+
+    &:hover {
+      background-color: rgba(2, 1, 31, 0.267);
+      color: var(--light-blue);
+      filter: saturate(4);
+    }
   }
 
   &__actions {
@@ -78,17 +107,28 @@ h6 {
     justify-content: flex-end;
 
     button {
-      padding: 4px 6px;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 6px;
     }
   }
 
   &__cell {
     border-color: var(--gray);
     border-width: 2px;
+    color: var(--light-gray);
     margin: 0 10px;
 
     img {
       vertical-align: middle;
+    }
+
+    &--clickable {
+      cursor: pointer;
+    }
+
+    &--header {
+      font-size: 1.1em;
     }
 
     &--right {

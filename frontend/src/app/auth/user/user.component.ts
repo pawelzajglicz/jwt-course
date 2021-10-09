@@ -1,11 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { finalize } from 'rxjs';
 
+import { NotificationService } from 'src/app/notification-module/notification.service';
+import { UserInfoDialogComponent } from './info-dialog/user-info-dialog/user-info-dialog.component';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
-import { NotificationService } from 'src/app/notification-module/notification.service';
 
 @Component({
   selector: 'nim-user',
@@ -53,7 +55,8 @@ export class UserComponent implements OnInit {
   ];
   displayedColumns: string[];
 
-  constructor(private notificationService: NotificationService,
+  constructor(private dialog: MatDialog,
+              private notificationService: NotificationService,
               private userService: UserService) { }
 
   ngOnInit(): void {
@@ -82,7 +85,14 @@ export class UserComponent implements OnInit {
   }
 
   onSelectUser(user: User) {
-
+      this.dialog.open(UserInfoDialogComponent, {
+        autoFocus: false,
+        data: user,
+        maxHeight: '600px',
+        maxWidth: '700px',
+        panelClass: 'custom-dialog-container',
+        width: 'fit-content'
+      });
   }
 
   setTitle(title: string) {
