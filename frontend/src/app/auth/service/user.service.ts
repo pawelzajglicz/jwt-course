@@ -47,7 +47,7 @@ export class UserService {
     return this.http.get<User[]>(`${this.host}/user`);
   }
 
-  getUsersFromLocalCache(users: User[]) {
+  getUsersFromLocalCache(): User[] {
     if (this.browserStorage.get('users')) {
       return JSON.parse(this.browserStorage.get('users'));
     }

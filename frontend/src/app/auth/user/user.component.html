@@ -34,7 +34,10 @@
 
 
   <div class="table__utils">
-    <input name="searchTerm" #searchInput="ngModel" ngModel type="search" placeholder="Search users...">
+    <input name="searchTerm" #searchInput="ngModel" ngModel
+    type="search"
+    placeholder="Search users..."
+    (ngModelChange)="searchUsers($event)">
     <button type="button" (click)="onAddUser()">
       <i class="fa fa-plus"></i><span>New User</span>
     </button>

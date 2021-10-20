@@ -113,6 +113,10 @@ export class UserComponent implements OnInit {
       });
   }
 
+  searchUsers(searchTerm: string) {
+    this.dataSource.filter = searchTerm;
+  }
+
   setTitle(title: string) {
     this.title = title;
   }
