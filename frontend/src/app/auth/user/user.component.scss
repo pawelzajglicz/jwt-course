@@ -153,6 +153,13 @@ h6 {
       span {
         margin-left: 6px;
       }
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(2, 1, 31, 0.267);
+        color: var(--light-blue);
+        filter: saturate(4);
+      }
     }
 
     input {
