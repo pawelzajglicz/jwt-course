@@ -13,9 +13,10 @@ import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AuthenticationService } from './auth/service/authentication.service';
-import { UserComponent } from './auth/user/user.component';
-import { UserInfoDialogComponent } from './auth/user/info-dialog/user-info-dialog/user-info-dialog.component';
 import { UserService } from './auth/service/user.service';
+import { UserInfoDialogComponent } from './auth/user/info-dialog/user-info-dialog/user-info-dialog.component';
+import { UserComponent } from './auth/user/user.component';
+import { UserAddDialogComponent } from './auth/user/user-add-dialog/user-add-dialog.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NotificationModule } from './notification-module/notification.module';
 import { UpperPanelComponent } from './upper-panel/upper-panel.component';
@@ -27,10 +28,14 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
     NavigationComponent,
     RegisterComponent,
     UpperPanelComponent,
+    UserAddDialogComponent,
     UserComponent,
     UserInfoDialogComponent
   ],
-  entryComponents: [UserInfoDialogComponent],
+  entryComponents: [
+    UserAddDialogComponent,
+    UserInfoDialogComponent
+  ],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,

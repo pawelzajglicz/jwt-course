@@ -6,6 +6,8 @@ import { finalize } from 'rxjs';
 
 import { NotificationService } from 'src/app/notification-module/notification.service';
 import { UserInfoDialogComponent } from './info-dialog/user-info-dialog/user-info-dialog.component';
+import { UserAddDialogComponent } from './user-add-dialog/user-add-dialog.component';
+import { UserAddedInfo } from './user-add-dialog/user-added-info';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 
@@ -84,10 +86,26 @@ export class UserComponent implements OnInit {
       )
   }
 
+  onAddUser() {
+    this.dialog.open(UserAddDialogComponent, {
+      autoFocus: false,
+      disableClose: true,
+      maxHeight: '600px',
+      maxWidth: '700px',
+      panelClass: 'custom-dialog-container',
+      width: 'fit-content'
+    }).afterClosed().subscribe((result: UserAddedInfo) => {
+      if (result.wasUserAdded) {
+        this.getUsers(false);
+      }
+    });
+  }
+
   onSelectUser(user: User) {
       this.dialog.open(UserInfoDialogComponent, {
         autoFocus: false,
         data: user,
+        disableClose: true,
         maxHeight: '600px',
         maxWidth: '700px',
         panelClass: 'custom-dialog-container',

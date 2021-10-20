@@ -1,0 +1,79 @@
+<div [hidden]="!isAdmin">
+
+  <div class="header">
+    <span class="header__title">New User</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="content">
+    <form id="ngForm" #newUserForm="ngForm" (ngSubmit)="onAddNewUser(newUserForm)" class="form">
+
+      <div class="form__element">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" required ngModel>
+      </div>
+
+      <div class="form__element">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" required ngModel>
+      </div>
+
+      <div class="form__element">
+        <label for="username">Username</label>
+        <input type="text" name="username" required ngModel>
+      </div>
+
+
+      <div class="form__element">
+        <label for="email">Email</label>
+        <input type="email" name="email" required ngModel>
+      </div>
+
+      <div *ngIf="isAdmin" class="form__element">
+        <label for="authority">Role</label>
+        <select name="role" required ngModel="ROLE_USER">
+          <option value="ROLE_USER">USER</option>
+          <option value="ROLE_HR">HR</option>
+          <option value="ROLE_MANAGER">MANAGER</option>
+          <option value="ROLE_ADMIN">ADMIN</option>
+          <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+        </select>
+      </div>
+
+      <div *ngIf="!isAdmin" class="form__element">
+        <label for="authority">Role</label>
+        <input type="text" name="role" required ngModel="USER" readonly>
+      </div>
+
+      <div class="form__element form__element__file-input">
+        <span>Profile Picture </span>
+        <label>
+          <input type="file" accept="image/*" name="profileImage" [style.display]="'none'"
+            (change)="onProfileImageChange($event)">
+          <span *ngIf="!!profileImageFile" class="form__element__file-input-label">{{ profileImageFile.name }}</span>
+          <span *ngIf="!profileImageFile" class="form__element__file-input-label">Choose File</span>
+        </label>
+      </div>
+
+      <label class="form__element form__element__checkbox">
+        <input type="checkbox" name="active" ngModel>
+        Active
+      </label>
+
+      <label class="form__element form__element__checkbox">
+        <input type="checkbox" name="notLocked" ngModel>
+        Unlocked
+      </label>
+
+    </form>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="footer">
+  <button type="button" class="footer__button" (click)="onClose()">Close</button>
+  <button type="button" class="footer__button footer__button--save" form="ngForm" type="submit"
+    [disabled]="newUserForm.invalid || !newUserForm.touched">Save changes</button>
+</div>
