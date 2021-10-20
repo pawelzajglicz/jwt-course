@@ -50,6 +50,11 @@ p {
     border: none;
     border-radius: 6px;
     padding: 6px 10px;
+
+    &:hover {
+      filter: hue-rotate(180deg);
+      cursor: pointer;
+    }
   }
 }
 

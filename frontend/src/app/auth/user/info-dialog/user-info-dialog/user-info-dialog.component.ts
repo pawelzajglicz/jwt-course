@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { User } from 'src/app/auth/model/user';
 
@@ -10,6 +10,10 @@ import { User } from 'src/app/auth/model/user';
 })
 export class UserInfoDialogComponent  {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public user: User) {}
+  constructor(private dialogRef: MatDialogRef<UserInfoDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public user: User) {}
 
+  onClose() {
+    this.dialogRef.close({ wasUserAdded: false });
+  }
 }
