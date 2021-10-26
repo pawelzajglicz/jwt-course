@@ -17,6 +17,7 @@ import { UserService } from './auth/service/user.service';
 import { UserInfoDialogComponent } from './auth/user/info-dialog/user-info-dialog/user-info-dialog.component';
 import { UserComponent } from './auth/user/user.component';
 import { UserAddDialogComponent } from './auth/user/user-add-dialog/user-add-dialog.component';
+import { UserDeleteDialogComponent } from './auth/user/user-delete-dialog/user-delete-dialog.component';
 import { UserEditDialogComponent } from './auth/user/user-edit-dialog/user-edit-dialog/user-edit-dialog.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { NotificationModule } from './notification-module/notification.module';
@@ -31,8 +32,9 @@ import { UpperPanelComponent } from './upper-panel/upper-panel.component';
     UpperPanelComponent,
     UserAddDialogComponent,
     UserComponent,
-    UserInfoDialogComponent,
-    UserEditDialogComponent
+    UserDeleteDialogComponent,
+    UserEditDialogComponent,
+    UserInfoDialogComponent
   ],
   entryComponents: [
     UserAddDialogComponent,

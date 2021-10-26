@@ -136,12 +136,12 @@ public class UserController extends ExceptionHandling {
         return response(OK, EMAIL_NEW_PASSWORD_SENT + email);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{userId}")
     @PreAuthorize("hasAnyAuthority('USER__DELETE')")
-    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") Long id) {
-        userService.deleteUser(id);
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("userId") String userId) {
+        userService.deleteUser(userId);
 
-        return response(NO_CONTENT, USER_DELETED_SUCCESSFULLY);
+        return response(OK, USER_DELETED_SUCCESSFULLY);
     }
 
     @PutMapping("/update-profile-image")

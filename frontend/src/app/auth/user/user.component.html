@@ -78,7 +78,7 @@
       <td mat-cell *matCellDef="let row" class="table__cell table__cell--right">
         <div class="table__actions">
           <button (click)="onEditUser(row)"><i class="fas fa-edit"></i></button>
-          <button><i class="fas fa-trash"></i></button>
+          <button (click)="onDeleteUser(row)"><i class="fas fa-trash"></i></button>
         </div>
       </td>
     </ng-container>

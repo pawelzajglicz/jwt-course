@@ -39,7 +39,7 @@ export class UserService {
     return formData;
   }
 
-  deleteUser(userId: number) {
+  deleteUser(userId: number | string) {
     return this.http.delete<CustomHttpRespone>(`${this.host}/user/${userId}`);
   }
 

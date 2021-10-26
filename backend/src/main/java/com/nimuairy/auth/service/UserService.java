@@ -16,7 +16,7 @@ public interface UserService {
 
     User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UsernameExistException, EmailExistException, IOException;
 
-    void deleteUser(Long id);
+    void deleteUser(String userId);
 
     User findUserByEmail(String email);
 

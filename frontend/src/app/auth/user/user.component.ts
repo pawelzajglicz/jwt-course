@@ -7,8 +7,10 @@ import { finalize } from 'rxjs';
 import { NotificationService } from 'src/app/notification-module/notification.service';
 import { UserInfoDialogComponent } from './info-dialog/user-info-dialog/user-info-dialog.component';
 import { UserAddDialogComponent } from './user-add-dialog/user-add-dialog.component';
-import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog/user-edit-dialog.component';
 import { UserAddedInfo } from './user-add-dialog/user-added-info';
+import { UserDeleteDialogComponent } from './user-delete-dialog/user-delete-dialog.component';
+import { UserDeletedInfo } from './user-delete-dialog/user-deleted-info';
+import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog/user-edit-dialog.component';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
 
@@ -102,8 +104,23 @@ export class UserComponent implements OnInit {
     });
   }
 
+  onDeleteUser(deleteUser: User) {
+    this.dialog.open(UserDeleteDialogComponent, {
+      autoFocus: false,
+      data: deleteUser,
+      disableClose: true,
+      maxHeight: '600px',
+      maxWidth: '700px',
+      panelClass: 'custom-dialog-container',
+      width: 'fit-content'
+    }).afterClosed().subscribe((result: UserDeletedInfo) => {
+      if (result.wasUserDeleted) {
+        this.getUsers(false);
+      }
+    });
+  }
+
   onEditUser(editUser: User) {
-    console.log('onEditUser', editUser);
     this.dialog.open(UserEditDialogComponent, {
       autoFocus: false,
       data: editUser,
