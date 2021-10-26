@@ -7,6 +7,7 @@ import { finalize } from 'rxjs';
 import { NotificationService } from 'src/app/notification-module/notification.service';
 import { UserInfoDialogComponent } from './info-dialog/user-info-dialog/user-info-dialog.component';
 import { UserAddDialogComponent } from './user-add-dialog/user-add-dialog.component';
+import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog/user-edit-dialog.component';
 import { UserAddedInfo } from './user-add-dialog/user-added-info';
 import { User } from '../model/user';
 import { UserService } from '../service/user.service';
@@ -98,6 +99,19 @@ export class UserComponent implements OnInit {
       if (result.wasUserAdded) {
         this.getUsers(false);
       }
+    });
+  }
+
+  onEditUser(editUser: User) {
+    console.log('onEditUser', editUser);
+    this.dialog.open(UserEditDialogComponent, {
+      autoFocus: false,
+      data: editUser,
+      disableClose: true,
+      maxHeight: '600px',
+      maxWidth: '700px',
+      panelClass: 'custom-dialog-container',
+      width: 'fit-content'
     });
   }
 

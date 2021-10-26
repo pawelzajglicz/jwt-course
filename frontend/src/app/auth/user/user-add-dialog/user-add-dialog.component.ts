@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -12,17 +12,14 @@ import { UserService } from '../../service/user.service';
   styleUrls: ['./user-add-dialog.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserAddDialogComponent implements OnInit {
+export class UserAddDialogComponent {
 
   isAdmin = true;
   profileImageFile: File;
 
   constructor(private dialogRef: MatDialogRef<UserAddDialogComponent>,
-    private notificationService: NotificationService,
-    private userService: UserService) { }
-
-  ngOnInit(): void {
-  }
+              private notificationService: NotificationService,
+              private userService: UserService) { }
 
   onAddNewUser(userForm: NgForm) {
     const formData = this.userService.createUserFormData(null, userForm.value, this.profileImageFile);
@@ -43,8 +40,6 @@ export class UserAddDialogComponent implements OnInit {
   }
 
   onProfileImageChange(event: any) {
-    console.log(event);
     this.profileImageFile = event.target.files[0];
-    console.log(this.profileImageFile)
   }
 }

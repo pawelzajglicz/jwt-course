@@ -110,6 +110,13 @@ h6 {
       padding: 6px 10px;
       border: none;
       border-radius: 6px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: rgba(2, 1, 31, 0.267);
+        color: var(--light-gray);
+        filter: saturate(4);
+      }
     }
   }
 

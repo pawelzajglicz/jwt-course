@@ -12,6 +12,7 @@ export class User {
   public notLocked: boolean;
   public role: string;
   public authorities: [];
+  public profileImage?: File;
 
   constructor() {
     this.userId = '';

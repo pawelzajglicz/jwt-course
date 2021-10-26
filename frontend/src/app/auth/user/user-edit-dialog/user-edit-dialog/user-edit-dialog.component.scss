@@ -1,0 +1,114 @@
+$footer-height: 3.5em;
+$header-height: 3em;
+
+:host {
+  background-color: wheat;
+  color: var(--light-gray);
+}
+
+.content {
+  background-color: var(--pink);
+}
+
+.divider {
+  border-color: var(--grass-green);
+  margin: 0;
+}
+
+.footer {
+  align-items: center;
+  background-color: var(--red);
+  display: flex;
+  height: $footer-height;
+  justify-content: end;
+  padding-right: 20px;
+
+  &__button {
+    background-color: var(--powder-pink);
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+
+    &:hover {
+      filter: hue-rotate(180deg);
+      cursor: pointer;
+    }
+
+    &--save {
+      background-color: var(--light-blue);
+      margin-left: 6px;
+
+      &:disabled {
+        background-color: var(--light-gray);
+        cursor: default;
+      }
+    }
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding-bottom: 1em;
+  padding-top: 1em;
+
+  &__element {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2em;
+    padding: 6px 24px 6px 12px;
+
+    &__checkbox {
+      display: flex;
+      gap: 0.5em;
+      flex-direction: row;
+      line-height: 1.5em;
+      padding-bottom: 0;
+      padding-top: 0;
+    }
+
+    &__file-input {
+      border-radius: 12px;
+
+      &-label {
+        background-color: white;
+        border-radius: 6px;
+        color: black;
+        display: block;
+        padding: 4px;
+        width: 100%;
+      }
+    }
+
+    input,
+    select {
+      border-radius: 6px;
+      border-width: 0;
+      box-sizing: border-box;
+      padding-left: 8px;
+      width: inherit;
+    }
+
+    input {
+      height: 1.5em;
+    }
+
+    select {
+      padding: 4px;
+      font-size: 0.8em;
+    }
+  }
+}
+
+.header {
+  align-items: center;
+  background-color: var(--red);
+  display: flex;
+  height: 3em;
+  padding-left: 30px;
+
+  &__user-info {
+    font-size: 1.4em;
+  }
+}

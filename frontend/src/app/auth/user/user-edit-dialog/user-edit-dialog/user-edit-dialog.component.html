@@ -1,0 +1,86 @@
+<div [hidden]="!isAdmin">
+
+  <div class="header">
+    <span class="header__title">Edit {{editedUser.firstName}} {{editedUser.lastName}}</span>
+  </div>
+
+  <hr class="divider">
+
+  <div class="content">
+    <form id="ngForm" #updateUserForm="ngForm" (ngSubmit)="onUpdateUser(updateUserForm)" class="form">
+
+      <div class="form__element">
+        <label for="firstName">First Name</label>
+        <input type="text" name="firstName" required ngModel
+        [(ngModel)]="editedUser.firstName">
+      </div>
+
+      <div class="form__element">
+        <label for="lastName">Last Name</label>
+        <input type="text" name="lastName" required ngModel
+        [(ngModel)]="editedUser.lastName">
+      </div>
+
+      <div class="form__element">
+        <label for="username">Username</label>
+        <input type="text" name="username" required ngModel
+        [(ngModel)]="editedUser.username" >
+      </div>
+
+
+      <div class="form__element">
+        <label for="email">Email</label>
+        <input type="email" name="email" required ngModel
+        [(ngModel)]="editedUser.email">
+      </div>
+
+      <div *ngIf="isAdmin" class="form__element">
+        <label for="authority">Role</label>
+        <select name="role" required ngModel="ROLE_USER"
+        [(ngModel)]="editedUser.role" >
+          <option value="ROLE_USER">USER</option>
+          <option value="ROLE_HR">HR</option>
+          <option value="ROLE_MANAGER">MANAGER</option>
+          <option value="ROLE_ADMIN">ADMIN</option>
+          <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+        </select>
+      </div>
+
+      <div *ngIf="!isAdmin" class="form__element">
+        <label for="authority">Role</label>
+        <input type="text" name="role" required ngModel="USER" readonly>
+      </div>
+
+      <div class="form__element form__element__file-input">
+        <span>Profile Picture </span>
+        <label>
+          <input type="file" accept="image/*" name="profileImage" [style.display]="'none'"
+            (change)="onProfileImageChange($event)">
+          <span *ngIf="!!profileImageFile" class="form__element__file-input-label">{{ profileImageFile.name }}</span>
+          <span *ngIf="!profileImageFile" class="form__element__file-input-label">Choose File</span>
+        </label>
+      </div>
+
+      <label class="form__element form__element__checkbox">
+        <input type="checkbox" name="active" ngModel
+          [(ngModel)]="editedUser.active">
+        Active
+      </label>
+
+      <label class="form__element form__element__checkbox">
+        <input type="checkbox" name="notLocked" ngModel
+          [(ngModel)]="editedUser.notLocked">
+        Unlocked
+      </label>
+
+    </form>
+  </div>
+</div>
+
+<hr class="divider">
+
+<div class="footer">
+  <button type="button" class="footer__button" (click)="onClose()">Close</button>
+  <button type="button" class="footer__button footer__button--save" form="ngForm" type="submit"
+    [disabled]="updateUserForm.invalid">Save changes</button>
+</div>
