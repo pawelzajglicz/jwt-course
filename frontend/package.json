@@ -23,7 +23,7 @@
     "@angular/router": "~12.2.7",
     "@auth0/angular-jwt": "^5.0.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "angular-notifier": "^9.1.0",
+    "angular-notifier": "^12.0.0",
     "normalize.css": "^8.0.1",
     "rxjs": "~7.3.0",
     "tslib": "^2.3.1",
